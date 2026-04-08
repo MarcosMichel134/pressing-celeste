@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pressing Céleste – Nettoyage des Tenues Sacrées</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #F0D080;
+    --gold-pale: #FFF8E7;
+    --celestial: #1A3A5C;
+    --celestial-mid: #2E5F8A;
+    --celestial-light: #4A90C4;
+    --white: #FDFCF8;
+    --cream: #F5F0E8;
+    --dark: #0D1E2E;
+    --text: #2C2C2C;
+    --text-muted: #6B6B6B;
+    --shadow: rgba(10, 30, 50, 0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Lato', sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; }
+
+  /* ══════════════ HERO ══════════════ */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--dark) 0%, var(--celestial) 55%, #1B4A6B 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; position: relative; overflow: hidden; padding: 2rem;
+  }
+
+  .hero-bg-photos {
+    position: absolute; inset: 0; z-index: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+
+  .hero-bg-photo { overflow: hidden; }
+
+  .hero-bg-photo img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: grayscale(20%) brightness(0.25) saturate(0.5);
+    transform: scale(1.06);
+  }
+
+  .hero-overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background:
+      radial-gradient(ellipse at 50% 50%, rgba(13,30,46,0.5) 0%, rgba(13,30,46,0.85) 100%),
+      linear-gradient(160deg, rgba(13,30,46,0.55) 0%, rgba(26,58,92,0.35) 50%, rgba(27,74,107,0.55) 100%);
+  }
+
+  .hero-overlay-glow {
+    position: absolute; inset: 0; z-index: 1;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.1) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 30%, rgba(74,144,196,0.12) 0%, transparent 55%);
+  }
+
+  .hero-ornament {
+    position: absolute; z-index: 2;
+    border: 1px solid rgba(201,168,76,0.18); border-radius: 50%;
+    animation: pulse-ring 4s ease-in-out infinite;
+  }
+  .hero-ornament:nth-child(4) { width: 380px; height: 380px; animation-delay: 0s; }
+  .hero-ornament:nth-child(5) { width: 580px; height: 580px; animation-delay: 1.2s; }
+  .hero-ornament:nth-child(6) { width: 780px; height: 780px; animation-delay: 2.4s; }
+
+  @keyframes pulse-ring {
+    0%, 100% { opacity: 0.25; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.02); }
+  }
+
+  .hero-content { position: relative; z-index: 3; max-width: 820px; }
+
+  .hero-badge {
+    display: inline-block;
+    border: 1px solid var(--gold); color: var(--gold);
+    font-family: 'Cinzel', serif; font-size: 0.68rem;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    padding: 0.45rem 1.4rem; margin-bottom: 2rem;
+    animation: fade-down 0.9s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.6rem, 6vw, 4.8rem); font-weight: 700;
+    color: var(--white); line-height: 1.08; margin-bottom: 0.5rem;
+    animation: fade-down 0.9s 0.2s ease both;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  }
+
+  .hero-title span { color: var(--gold-light); }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.55rem); font-style: italic;
+    color: rgba(253,252,248,0.78); margin-bottom: 3rem;
+    animation: fade-down 0.9s 0.4s ease both;
+  }
+
+  .hero-free-badge {
+    display: inline-flex; align-items: center; gap: 0.7rem;
+    background: rgba(201,168,76,0.14); border: 1px solid rgba(201,168,76,0.45);
+    color: var(--gold-light); padding: 0.8rem 1.8rem; border-radius: 50px;
+    font-size: 0.88rem; font-weight: 700; letter-spacing: 0.06em;
+    animation: fade-down 0.9s 0.6s ease both; backdrop-filter: blur(12px);
+  }
+
+  .hero-scroll {
+    position: absolute; bottom: 2rem; left: 50%;
+    transform: translateX(-50%); z-index: 3;
+    display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+    color: rgba(255,255,255,0.38); font-size: 0.68rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    animation: bounce 2.2s infinite;
+  }
+
+  .scroll-line { width: 1px; height: 42px; background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.55)); }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(7px); }
+  }
+
+  @keyframes fade-down {
+    from { opacity: 0; transform: translateY(-22px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ══════════════ PHOTO STRIP ══════════════ */
+  .photo-strip { height: 260px; overflow: hidden; position: relative; display: flex; }
+
+  .photo-strip-inner { display: flex; gap: 3px; width: 100%; }
+
+  .photo-strip-item { flex: 1; overflow: hidden; position: relative; min-width: 0; }
+
+  .photo-strip-item img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: saturate(0.8) brightness(0.82);
+    transition: transform 0.55s ease, filter 0.35s ease;
+  }
+
+  .photo-strip-item:hover img { transform: scale(1.08); filter: saturate(1) brightness(0.92); }
+
+  .photo-strip-item::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(13,30,46,0.4) 100%);
+  }
+
+  .photo-strip-overlay {
+    position: absolute; inset: 0; z-index: 2;
+    background: linear-gradient(
+      to right,
+      rgba(13,30,46,0.55) 0%, rgba(13,30,46,0.08) 12%,
+      rgba(13,30,46,0.08) 88%, rgba(13,30,46,0.55) 100%
+    );
+    display: flex; align-items: center; justify-content: center; pointer-events: none;
+  }
+
+  .photo-strip-text {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.95rem, 2.5vw, 1.55rem);
+    color: rgba(255,255,255,0.92); letter-spacing: 0.22em;
+    text-align: center; text-shadow: 0 2px 20px rgba(0,0,0,0.55);
+  }
+
+  .photo-strip-text span { color: var(--gold-light); }
+
+  /* Placeholder pour strip sans image */
+  .strip-placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, var(--celestial), var(--celestial-mid));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; opacity: 0.3;
+  }
+
+  /* ══════════════ SECTIONS ══════════════ */
+  section { padding: 5rem 1.5rem; }
+
+  .section-label {
+    font-family: 'Cinzel', serif; font-size: 0.64rem;
+    letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--gold); display: block; margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 300;
+    color: var(--celestial); line-height: 1.2; margin-bottom: 1rem;
+  }
+
+  .section-divider {
+    width: 60px; height: 2px;
+    background: linear-gradient(to right, var(--gold), var(--gold-light));
+    margin: 1.5rem 0;
+  }
+
+  /* ══════════════ INFO BANNER ══════════════ */
+  .info-banner {
+    background: linear-gradient(135deg, var(--celestial) 0%, var(--celestial-mid) 100%);
+    padding: 2.5rem 1.5rem; text-align: center; position: relative; overflow: hidden;
+  }
+
+  .info-banner::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,0.02) 20px, rgba(255,255,255,0.02) 40px);
+  }
+
+  .info-banner-inner { position: relative; max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+
+  .free-delivery-card {
+    background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.5);
+    border-radius: 12px; padding: 1.5rem 2.5rem;
+    color: var(--white); backdrop-filter: blur(10px);
+  }
+
+  .free-delivery-card .big-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+
+  .free-delivery-card h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gold-light); margin-bottom: 0.4rem; }
+
+  .free-delivery-card p { font-size: 0.9rem; color: rgba(255,255,255,0.8); line-height: 1.6; }
+
+  /* ══════════════ CATALOGUE ══════════════ */
+  .catalogue { background: var(--cream); }
+  .catalogue-inner { max-width: 1150px; margin: 0 auto; }
+  .catalogue-header { text-align: center; margin-bottom: 3rem; }
+
+  .tenues-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.8rem; }
+
+  .tenue-card {
+    background: var(--white); border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 18px; overflow: hidden;
+    transition: all 0.35s ease; cursor: pointer; position: relative;
+    box-shadow: 0 2px 12px rgba(10,30,50,0.06);
+  }
+
+  .tenue-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px var(--shadow); border-color: var(--gold); }
+
+  .tenue-card.selected {
+    border-color: var(--gold); background: var(--gold-pale);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.22), 0 10px 30px var(--shadow);
+  }
+
+  /* ── Image tenue ── */
+  .tenue-img-wrap {
+    position: relative; width: 100%; height: 220px; overflow: hidden;
+    background: linear-gradient(135deg, var(--celestial) 0%, var(--celestial-mid) 100%);
+  }
+
+  .tenue-img-wrap img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block; transition: transform 0.5s ease;
+  }
+
+  .tenue-card:hover .tenue-img-wrap img { transform: scale(1.07); }
+
+  .tenue-img-placeholder {
+    position: absolute; inset: 0;
+    display: none;
+    flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem;
+    background: linear-gradient(135deg, var(--celestial) 0%, var(--celestial-mid) 100%);
+    color: rgba(255,255,255,0.35);
+    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+    font-family: 'Cinzel', serif;
+  }
+
+  .tenue-img-placeholder .ph-icon { font-size: 3.8rem; opacity: 0.45; }
+
+  .tenue-img-placeholder .ph-line {
+    width: 40px; height: 1px;
+    background: rgba(201,168,76,0.3); margin: 0.2rem 0;
+  }
+
+  .tenue-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(10,24,40,0.78) 0%, rgba(10,24,40,0.1) 55%);
+  }
+
+  .tenue-img-name {
+    position: absolute; bottom: 0.85rem; left: 1rem; right: 3rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.12rem; font-weight: 600;
+    color: var(--white); line-height: 1.25;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  }
+
+  .selected-badge {
+    position: absolute; top: 0.75rem; right: 0.75rem; z-index: 2;
+    background: var(--gold); color: var(--dark);
+    font-size: 0.6rem; font-family: 'Cinzel', serif; font-weight: 700;
+    padding: 0.28rem 0.65rem; border-radius: 50px;
+    opacity: 0; transform: scale(0.8); transition: all 0.22s; white-space: nowrap;
+  }
+
+  .tenue-card.selected .selected-badge { opacity: 1; transform: scale(1); }
+
+  .tenue-card-body { padding: 1.15rem 1.4rem 1.5rem; }
+
+  .tenue-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 1rem; }
+
+  .tenue-price-row { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+
+  .tenue-price { font-family: 'Cinzel', serif; font-size: 1.22rem; font-weight: 700; color: var(--gold); }
+
+  .tenue-price small {
+    font-size: 0.58rem; font-weight: 400; color: var(--text-muted);
+    font-family: 'Lato', sans-serif; letter-spacing: 0.05em; display: block;
+  }
+
+  .select-btn {
+    background: var(--celestial); color: var(--white); border: none;
+    border-radius: 50px; padding: 0.45rem 1.1rem;
+    font-size: 0.73rem; font-family: 'Lato', sans-serif;
+    font-weight: 700; letter-spacing: 0.05em; cursor: pointer;
+    transition: all 0.22s; white-space: nowrap;
+  }
+
+  .tenue-card.selected .select-btn { background: var(--gold); color: var(--dark); }
+
+  /* ══════════════ PANIER ══════════════ */
+  .panier-section { background: var(--white); display: none; }
+  .panier-section.visible { display: block; }
+  .panier-inner { max-width: 820px; margin: 0 auto; }
+  .panier-header { margin-bottom: 2.5rem; }
+  .panier-items { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem; }
+
+  .panier-item {
+    background: var(--cream); border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 12px; padding: 1rem 1.4rem;
+    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+  }
+
+  .panier-item-thumb {
+    width: 58px; height: 58px; border-radius: 10px; overflow: hidden;
+    background: var(--celestial); flex-shrink: 0; position: relative;
+  }
+
+  .panier-item-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .panier-item-thumb-placeholder {
+    position: absolute; inset: 0; display: none;
+    align-items: center; justify-content: center; font-size: 1.6rem;
+  }
+
+  .panier-item-info { flex: 1; min-width: 130px; }
+
+  .panier-item-name { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; color: var(--celestial); }
+
+  .panier-item-price { font-size: 0.77rem; color: var(--gold); font-weight: 700; }
+
+  .qty-control {
+    display: flex; align-items: center; gap: 0.6rem;
+    background: var(--white); border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 50px; padding: 0.28rem 0.6rem;
+  }
+
+  .qty-btn {
+    width: 28px; height: 28px; border-radius: 50%;
+    border: 1px solid var(--gold); background: transparent;
+    color: var(--gold); font-size: 1rem; font-weight: 700;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all 0.18s; line-height: 1;
+  }
+
+  .qty-btn:hover { background: var(--gold); color: var(--white); }
+
+  .qty-value { min-width: 28px; text-align: center; font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 700; color: var(--celestial); }
+
+  .panier-item-subtotal { font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 700; color: var(--celestial); white-space: nowrap; }
+
+  .remove-btn { background: none; border: none; color: #CC4444; font-size: 1.1rem; cursor: pointer; padding: 0.25rem; border-radius: 4px; transition: all 0.18s; line-height: 1; }
+  .remove-btn:hover { background: #FFE5E5; }
+
+  .panier-total {
+    background: linear-gradient(135deg, var(--celestial) 0%, var(--celestial-mid) 100%);
+    border-radius: 12px; padding: 1.4rem 2rem;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  }
+
+  .panier-total-label { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: rgba(255,255,255,0.8); font-style: italic; }
+
+  .panier-total-amount { font-family: 'Cinzel', serif; font-size: 1.8rem; font-weight: 700; color: var(--gold-light); }
+
+  /* ══════════════ FORMULAIRE ══════════════ */
+  .commande-section { background: var(--cream); }
+  .commande-inner { max-width: 720px; margin: 0 auto; }
+  .commande-header { margin-bottom: 2.5rem; }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.42rem; }
+  .form-group.full { grid-column: 1 / -1; }
+
+  .form-label { font-family: 'Cinzel', serif; font-size: 0.63rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--celestial-mid); }
+
+  .form-input, .form-textarea {
+    border: 1px solid rgba(26,58,92,0.2); border-radius: 8px;
+    padding: 0.85rem 1rem; font-family: 'Lato', sans-serif;
+    font-size: 0.9rem; color: var(--text); background: var(--white);
+    transition: all 0.2s; outline: none;
+  }
+
+  .form-input:focus, .form-textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.1); }
+
+  .form-textarea { resize: vertical; min-height: 80px; }
+
+  .selected-summary {
+    background: linear-gradient(135deg, var(--gold-pale) 0%, #FFF5D6 100%);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 10px; padding: 1rem 1.3rem; margin-bottom: 1.2rem;
+  }
+
+  .selected-summary h4 { font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 0.16em; color: var(--gold); margin-bottom: 0.6rem; }
+
+  .summary-item { font-size: 0.84rem; color: var(--celestial); line-height: 1.88; }
+
+  .summary-total { font-family: 'Cinzel', serif; font-size: 0.88rem; font-weight: 700; color: var(--celestial); margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid rgba(201,168,76,0.3); }
+
+  .empty-cart-msg { text-align: center; color: var(--text-muted); font-style: italic; padding: 2rem; background: var(--white); border-radius: 10px; border: 1px dashed rgba(26,58,92,0.2); margin-bottom: 1.2rem; }
+
+  .submit-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: var(--white); border: none; border-radius: 12px;
+    padding: 1.15rem 2rem; font-family: 'Cinzel', serif;
+    font-size: 1rem; font-weight: 600; letter-spacing: 0.08em;
+    cursor: pointer; transition: all 0.3s;
+    display: flex; align-items: center; justify-content: center; gap: 0.8rem; margin-top: 1.5rem;
+  }
+
+  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(37,211,102,0.3); }
+  .submit-btn:active { transform: translateY(0); }
+  .submit-btn .wa-icon { font-size: 1.3rem; }
+
+  .form-note { text-align: center; font-size: 0.78rem; color: var(--text-muted); margin-top: 0.8rem; line-height: 1.5; }
+
+  /* ══════════════ FOOTER ══════════════ */
+  footer { background: var(--dark); padding: 2.5rem 1.5rem; text-align: center; }
+  .footer-inner { max-width: 600px; margin: 0 auto; }
+  .footer-logo { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gold-light); margin-bottom: 0.5rem; }
+  .footer-sub { font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-bottom: 1.5rem; font-style: italic; font-family: 'Cormorant Garamond', serif; }
+  .footer-divider { width: 40px; height: 1px; background: var(--gold); margin: 1rem auto; opacity: 0.4; }
+  .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.22); letter-spacing: 0.05em; }
+
+  /* ══════════════ RESPONSIVE ══════════════ */
+  @media (max-width: 640px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .hero-bg-photos { grid-template-columns: repeat(2, 1fr); }
+    .panier-item { gap: 0.7rem; }
+    .panier-total { flex-direction: column; text-align: center; }
+    .photo-strip { height: 190px; }
+    .tenues-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════ HERO ═══════════════════════════════════ -->
+<section class="hero">
+
+  <!--
+    PHOTOS D'AMBIANCE EN ARRIÈRE-PLAN DU HERO
+    ► Remplacez les attributs src="photo-ambiance-X.jpg" par vos propres photos.
+      Placez vos fichiers image dans le même dossier que ce fichier HTML.
+      Taille conseillée : 800×600 px ou plus, format JPG ou WebP.
+  -->
+  <div class="hero-bg-photos">
+    <div class="hero-bg-photo">
+      <img src="photo-ambiance-1.jpg" alt="Fidèles CCC en tenues blanches"
+           onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg,#0D1E2E,#1A3A5C)'">
+    </div>
+    <div class="hero-bg-photo">
+      <img src="photo-ambiance-2.jpg" alt="Cérémonie Christianisme Céleste"
+           onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(160deg,#1A3A5C,#2E5F8A)'">
+    </div>
+    <div class="hero-bg-photo">
+      <img src="photo-ambiance-3.jpg" alt="Fidèles CCC en prière"
+           onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg,#0D2035,#1A3A5C)'">
+    </div>
+    <div class="hero-bg-photo">
+      <img src="photo-ambiance-4.jpg" alt="Assemblée CCC en tenues"
+           onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg,#1B4A6B,#1A3A5C)'">
+    </div>
+    <div class="hero-bg-photo">
+      <img src="photo-ambiance-5.jpg" alt="Pasteur CCC en tenue liturgique"
+           onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(160deg,#0D1E2E,#2E5F8A)'">
+    </div>
+    <div class="hero-bg-photo">
+      <img src="photo-ambiance-6.jpg" alt="Chœur CCC en tenues blanches"
+           onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg,#1A3A5C,#0D2035)'">
+    </div>
+    <div class="hero-bg-photo">
+      <img src="photo-ambiance-7.jpg" alt="Office liturgique CCC"
+           onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg,#2E5F8A,#1A3A5C)'">
+    </div>
+    <div class="hero-bg-photo">
+      <img src="photo-ambiance-8.jpg" alt="Membres CCC en tenues célestes"
+           onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(160deg,#0D1E2E,#1B4A6B)'">
+    </div>
+  </div>
+
+  <div class="hero-overlay"></div>
+  <div class="hero-overlay-glow"></div>
+  <div class="hero-ornament"></div>
+  <div class="hero-ornament"></div>
+  <div class="hero-ornament"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">✦ Service de Pressing Sacré ✦</div>
+    <h1 class="hero-title">Pressing <span>Céleste</span></h1>
+    <p class="hero-subtitle">Spécialiste du nettoyage des tenues de<br>l'Église du Christianisme Céleste</p>
+    <div class="hero-free-badge">
+      <span>🚗</span>
+      Récupération &amp; Livraison GRATUITES à domicile
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Découvrir</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ BANNER ═══════════════════════════════════ -->
+<div class="info-banner">
+  <div class="info-banner-inner">
+    <div class="free-delivery-card">
+      <div class="big-icon">🎁</div>
+      <h3>Déplacement Entièrement Gratuit</h3>
+      <p>Nous venons récupérer vos tenues sacrées à votre domicile et vous les restituons propres et soignées, sans aucun frais de déplacement. Votre confort est notre priorité.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ CATALOGUE ═══════════════════════════════════ -->
+<section class="catalogue" id="catalogue">
+  <div class="catalogue-inner">
+    <div class="catalogue-header">
+      <span class="section-label">✦ Nos Prestations</span>
+      <h2 class="section-title">Catalogue des Tenues Sacrées</h2>
+      <div class="section-divider" style="margin:1.5rem auto;"></div>
+      <p style="color:var(--text-muted);font-size:0.88rem;line-height:1.75;max-width:520px;margin:0 auto;">
+        Sélectionnez les tenues que vous souhaitez faire nettoyer.<br>
+        Cliquez sur une carte pour l'ajouter à votre commande.
+      </p>
+    </div>
+    <div class="tenues-grid" id="tenues-grid"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ PHOTO STRIP ═══════════════════════════════════ -->
+<!--
+  BANDE DE PHOTOS D'AMBIANCE ENTRE SECTIONS
+  ► Remplacez les src="photo-strip-X.jpg" par vos propres photos.
+-->
+<div class="photo-strip">
+  <div class="photo-strip-inner">
+    <div class="photo-strip-item">
+      <img src="photo-strip-1.jpg" alt="Fidèles CCC en tenues"
+           onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'strip-placeholder\'>🕊️</div>'">
+    </div>
+    <div class="photo-strip-item">
+      <img src="photo-strip-2.jpg" alt="Assemblée CCC"
+           onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'strip-placeholder\'>✨</div>'">
+    </div>
+    <div class="photo-strip-item">
+      <img src="photo-strip-3.jpg" alt="Tenues liturgiques CCC"
+           onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'strip-placeholder\'>🙏</div>'">
+    </div>
+    <div class="photo-strip-item">
+      <img src="photo-strip-4.jpg" alt="Office CCC"
+           onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'strip-placeholder\'>⭐</div>'">
+    </div>
+    <div class="photo-strip-item">
+      <img src="photo-strip-5.jpg" alt="Cérémonie CCC"
+           onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'strip-placeholder\'>🌟</div>'">
+    </div>
+  </div>
+  <div class="photo-strip-overlay">
+    <div class="photo-strip-text">
+      Tenues soignées avec <span>foi &amp; expertise</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ PANIER ═══════════════════════════════════ -->
+<section class="panier-section" id="panier-section">
+  <div class="panier-inner">
+    <div class="panier-header">
+      <span class="section-label">✦ Votre Sélection</span>
+      <h2 class="section-title">Récapitulatif de Commande</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="panier-items" id="panier-items"></div>
+    <div class="panier-total">
+      <span class="panier-total-label">Total estimé</span>
+      <span class="panier-total-amount" id="panier-total-amount">0 FCFA</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ FORMULAIRE ═══════════════════════════════════ -->
+<section class="commande-section" id="commande">
+  <div class="commande-inner">
+    <div class="commande-header">
+      <span class="section-label">✦ Passez Commande</span>
+      <h2 class="section-title">Formulaire de Commande</h2>
+      <div class="section-divider"></div>
+      <p style="color:var(--text-muted);font-size:0.88rem;line-height:1.75;">
+        Remplissez le formulaire ci-dessous. Votre commande sera envoyée directement sur WhatsApp.
+      </p>
+    </div>
+
+    <div id="form-selected-summary"></div>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label" for="inp-nom">Nom complet *</label>
+        <input class="form-input" type="text" id="inp-nom" placeholder="Ex : Frère Emmanuel Koffi" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="inp-tel">Téléphone / WhatsApp *</label>
+        <input class="form-input" type="tel" id="inp-tel" placeholder="+229 XX XX XX XX" required>
+      </div>
+      <div class="form-group full">
+        <label class="form-label" for="inp-adresse">Adresse de récupération *</label>
+        <input class="form-input" type="text" id="inp-adresse" placeholder="Quartier, rue, point de repère..." required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="inp-date">Date souhaitée de récupération *</label>
+        <input class="form-input" type="date" id="inp-date" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="inp-heure">Heure préférée</label>
+        <input class="form-input" type="time" id="inp-heure">
+      </div>
+      <div class="form-group full">
+        <label class="form-label" for="inp-notes">Notes ou instructions particulières</label>
+        <textarea class="form-textarea" id="inp-notes" placeholder="Taches particulières, fragilité du tissu, instructions spéciales..."></textarea>
+      </div>
+    </div>
+
+    <button class="submit-btn" onclick="envoyerCommande()">
+      <span class="wa-icon">💬</span>
+      Envoyer ma commande sur WhatsApp
+    </button>
+    <p class="form-note">
+      Un message pré-rempli s'ouvrira dans WhatsApp. Il vous suffira d'appuyer sur <strong>Envoyer</strong>.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ FOOTER ═══════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">✦ Pressing Céleste ✦</div>
+    <p class="footer-sub">Au service de la pureté des tenues sacrées</p>
+    <div class="footer-divider"></div>
+    <p class="footer-copy">© 2025 Pressing Céleste – Tous droits réservés</p>
+  </div>
+</footer>
+
+<script>
+// ════════════════════════════════════════════════════════════════
+//  CATALOGUE : TENUES, TARIFS & IMAGES
+//
+//  ► Chaque tenue possède un champ "img" avec le nom du fichier image.
+//  ► Placez vos fichiers dans le MÊME DOSSIER que ce fichier HTML.
+//  ► Format recommandé : JPG ou WebP, ratio paysage 3:2 (ex: 600×400 px).
+//  ► Si le fichier est introuvable, un placeholder élégant s'affiche.
+// ════════════════════════════════════════════════════════════════
+const TENUES = [
+  {
+    id: 1, icon: "👘",
+    nom: "Sutane Blanche (Complète)",
+    img: "tenue-sutane-blanche.jpg",       // ← Remplacez par votre fichier
+    description: "Robe longue blanche avec col et boutons, tenue liturgique principale des fidèles.",
+    prix: 2500
+  },
+  {
+    id: 2, icon: "🥻",
+    nom: "Sutane Bleue / Céleste",
+    img: "tenue-sutane-bleue.jpg",
+    description: "Robe bleue céleste portée lors des offices et célébrations spéciales.",
+    prix: 2500
+  },
+  {
+    id: 3, icon: "👗",
+    nom: "Sutane de Deuil (Noire)",
+    img: "tenue-sutane-noire.jpg",
+    description: "Tenue noire liturgique portée lors des cérémonies funèbres et de deuil.",
+    prix: 2500
+  },
+  {
+    id: 4, icon: "🎽",
+    nom: "Tablier / Sarrau",
+    img: "tenue-tablier.jpg",
+    description: "Tablier de protection porté par-dessus la sutane lors des offices au sol.",
+    prix: 1500
+  },
+  {
+    id: 5, icon: "🧣",
+    nom: "Foulard Sacré",
+    img: "tenue-foulard.jpg",
+    description: "Foulard liturgique utilisé pour la prière et les cérémonies rituelles.",
+    prix: 1000
+  },
+  {
+    id: 6, icon: "🧢",
+    nom: "Bonnet / Coiffe Blanche",
+    img: "tenue-bonnet.jpg",
+    description: "Coiffe portée par les femmes lors des offices et assemblées de prière.",
+    prix: 1000
+  },
+  {
+    id: 7, icon: "🩱",
+    nom: "Camisole / Sous-vêtement Liturgique",
+    img: "tenue-camisole.jpg",
+    description: "Pièce intérieure portée sous la sutane pour les grandes cérémonies.",
+    prix: 1500
+  },
+  {
+    id: 8, icon: "🥋",
+    nom: "Tenue de Prière Complète (Homme)",
+    img: "tenue-homme-complete.jpg",
+    description: "Ensemble complet masculin : sutane + pantalon + accessoires liturgiques.",
+    prix: 4000
+  },
+  {
+    id: 9, icon: "👒",
+    nom: "Tenue Cérémonielle de Pasteur",
+    img: "tenue-pasteur.jpg",
+    description: "Tenue officielle des pasteurs et serviteurs : manteau, étole et accessoires.",
+    prix: 5000
+  },
+  {
+    id: 10, icon: "🧦",
+    nom: "Vêtements d'Enfant (Liturgiques)",
+    img: "tenue-enfant.jpg",
+    description: "Petites tenues de prière pour les enfants membres de l'Église.",
+    prix: 1500
+  },
+  {
+    id: 11, icon: "🎀",
+    nom: "Cape / Manteau de Cérémonie",
+    img: "tenue-cape.jpg",
+    description: "Cape portée par les dignitaires lors des grandes célébrations de l'Église.",
+    prix: 3000
+  },
+  {
+    id: 12, icon: "🧺",
+    nom: "Lot Famille (5 pièces mixtes)",
+    img: "tenue-lot-famille.jpg",
+    description: "Forfait avantageux pour nettoyer 5 pièces au choix d'une même famille.",
+    prix: 9000
+  }
+];
+
+// ══════════════════════════════════════════
+//  ÉTAT
+// ══════════════════════════════════════════
+let panier = {};
+
+// ══════════════════════════════════════════
+//  CATALOGUE
+// ══════════════════════════════════════════
+function renderCatalogue() {
+  const grid = document.getElementById('tenues-grid');
+  grid.innerHTML = TENUES.map(t => `
+    <div class="tenue-card ${panier[t.id] ? 'selected' : ''}" id="card-${t.id}" onclick="toggleTenue(${t.id})">
+
+      <div class="tenue-img-wrap">
+        <img
+          src="${t.img}"
+          alt="${t.nom}"
+          onerror="
+            this.style.display='none';
+            this.parentElement.querySelector('.tenue-img-placeholder').style.display='flex';
+          "
+        >
+        <div class="tenue-img-placeholder">
+          <span class="ph-icon">${t.icon}</span>
+          <div class="ph-line"></div>
+          <span>Ajoutez votre photo</span>
+        </div>
+        <div class="tenue-img-overlay"></div>
+        <div class="tenue-img-name">${t.nom}</div>
+        <div class="selected-badge">✓ Ajoutée</div>
+      </div>
+
+      <div class="tenue-card-body">
+        <p class="tenue-desc">${t.description}</p>
+        <div class="tenue-price-row">
+          <div class="tenue-price">
+            ${t.prix.toLocaleString('fr-FR')} FCFA
+            <small>par pièce</small>
+          </div>
+          <button class="select-btn">${panier[t.id] ? '✓ Sélectionnée' : 'Sélectionner'}</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ══════════════════════════════════════════
+//  TOGGLE TENUE
+// ══════════════════════════════════════════
+function toggleTenue(id) {
+  const tenue = TENUES.find(t => t.id === id);
+  if (panier[id]) { delete panier[id]; }
+  else { panier[id] = { ...tenue, qty: 1 }; }
+  renderCatalogue();
+  renderPanier();
+  renderFormSummary();
+  updatePanierVisibility();
+}
+
+// ══════════════════════════════════════════
+//  PANIER
+// ══════════════════════════════════════════
+function updatePanierVisibility() {
+  const ps = document.getElementById('panier-section');
+  const hasItems = Object.keys(panier).length > 0;
+  ps.classList.toggle('visible', hasItems);
+  if (hasItems) setTimeout(() => ps.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 120);
+}
+
+function renderPanier() {
+  const container = document.getElementById('panier-items');
+  const items = Object.values(panier);
+
+  if (items.length === 0) {
+    container.innerHTML = '';
+    document.getElementById('panier-total-amount').textContent = '0 FCFA';
+    return;
+  }
+
+  container.innerHTML = items.map(item => `
+    <div class="panier-item">
+      <div class="panier-item-thumb">
+        <img src="${item.img}" alt="${item.nom}"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="panier-item-thumb-placeholder">${item.icon}</div>
+      </div>
+      <div class="panier-item-info">
+        <div class="panier-item-name">${item.nom}</div>
+        <div class="panier-item-price">${item.prix.toLocaleString('fr-FR')} FCFA / pièce</div>
+      </div>
+      <div class="qty-control">
+        <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
+        <span class="qty-value">${item.qty}</span>
+        <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+      </div>
+      <div class="panier-item-subtotal">${(item.prix * item.qty).toLocaleString('fr-FR')} FCFA</div>
+      <button class="remove-btn" onclick="retirerItem(${item.id})" title="Retirer">✕</button>
+    </div>
+  `).join('');
+
+  const total = items.reduce((sum, i) => sum + i.prix * i.qty, 0);
+  document.getElementById('panier-total-amount').textContent = total.toLocaleString('fr-FR') + ' FCFA';
+}
+
+function changeQty(id, delta) {
+  if (!panier[id]) return;
+  panier[id].qty = Math.max(1, panier[id].qty + delta);
+  renderPanier();
+  renderFormSummary();
+}
+
+function retirerItem(id) {
+  delete panier[id];
+  renderCatalogue();
+  renderPanier();
+  renderFormSummary();
+  updatePanierVisibility();
+}
+
+// ══════════════════════════════════════════
+//  RÉSUMÉ FORMULAIRE
+// ══════════════════════════════════════════
+function renderFormSummary() {
+  const container = document.getElementById('form-selected-summary');
+  const items = Object.values(panier);
+
+  if (items.length === 0) {
+    container.innerHTML = `<div class="empty-cart-msg">⬆️ Veuillez sélectionner au moins une tenue dans le catalogue ci-dessus.</div>`;
+    return;
+  }
+
+  const total = items.reduce((sum, i) => sum + i.prix * i.qty, 0);
+  container.innerHTML = `
+    <div class="selected-summary">
+      <h4>✦ Tenues Sélectionnées</h4>
+      ${items.map(i => `
+        <div class="summary-item">
+          ${i.icon} <strong>${i.nom}</strong> × ${i.qty} = ${(i.prix * i.qty).toLocaleString('fr-FR')} FCFA
+        </div>
+      `).join('')}
+      <div class="summary-total">Total : ${total.toLocaleString('fr-FR')} FCFA &nbsp;(+ Livraison GRATUITE 🎁)</div>
+    </div>`;
+}
+
+// ══════════════════════════════════════════
+//  ENVOI WHATSAPP
+// ══════════════════════════════════════════
+function envoyerCommande() {
+  const nom     = document.getElementById('inp-nom').value.trim();
+  const tel     = document.getElementById('inp-tel').value.trim();
+  const adresse = document.getElementById('inp-adresse').value.trim();
+  const date    = document.getElementById('inp-date').value;
+  const heure   = document.getElementById('inp-heure').value;
+  const notes   = document.getElementById('inp-notes').value.trim();
+
+  if (!nom || !tel || !adresse || !date) {
+    alert('⚠️ Veuillez remplir tous les champs obligatoires (Nom, Téléphone, Adresse, Date).');
+    return;
+  }
+
+  const items = Object.values(panier);
+  if (items.length === 0) {
+    alert('⚠️ Veuillez sélectionner au moins une tenue dans le catalogue.');
+    return;
+  }
+
+  const total   = items.reduce((sum, i) => sum + i.prix * i.qty, 0);
+  const dateObj = new Date(date + 'T00:00:00');
+  const dateFR  = dateObj.toLocaleDateString('fr-FR', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
+  let msg = `🙏 *PRESSING CÉLESTE – Nouvelle Commande* 🙏\n`;
+  msg += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+  msg += `👤 *Nom :* ${nom}\n`;
+  msg += `📞 *Téléphone :* ${tel}\n`;
+  msg += `📍 *Adresse :* ${adresse}\n`;
+  msg += `📅 *Date de récupération souhaitée :* ${dateFR}\n`;
+  if (heure) msg += `🕐 *Heure préférée :* ${heure}\n`;
+  msg += `\n✨ *Tenues à nettoyer :*\n`;
+  msg += `─────────────────────\n`;
+  items.forEach(i => {
+    msg += `${i.icon} ${i.nom}\n   Quantité : ${i.qty} × ${i.prix.toLocaleString('fr-FR')} FCFA = *${(i.prix * i.qty).toLocaleString('fr-FR')} FCFA*\n`;
+  });
+  msg += `─────────────────────\n`;
+  msg += `💰 *TOTAL ESTIMÉ : ${total.toLocaleString('fr-FR')} FCFA*\n`;
+  msg += `🚗 *Livraison & Récupération : GRATUITE*\n`;
+  if (notes) msg += `\n📝 *Notes :* ${notes}\n`;
+  msg += `\n━━━━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `_Message généré via Pressing Céleste_`;
+
+  // ⚠️ REMPLACEZ PAR VOTRE NUMÉRO WHATSAPP (sans le + ni espaces)
+  // Exemple Bénin : 22961234567
+  const NUMERO_WHATSAPP = "22961000000"; // ← MODIFIEZ ICI
+
+  window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+// ══════════════════════════════════════════
+//  INITIALISATION
+// ══════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('inp-date').min = new Date().toISOString().split('T')[0];
+  renderCatalogue();
+  renderFormSummary();
+});
+</script>
+</body>
+</html>
