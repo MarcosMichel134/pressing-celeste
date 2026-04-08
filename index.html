@@ -697,35 +697,79 @@
 </footer>
 
 <script>
-  // Envoi WhatsApp
-  function envoyerCommande() {
-    const nom = document.getElementById('inp-nom').value.trim();
-    const tel = document.getElementById('inp-tel').value.trim();
-    const adresse = document.getElementById('inp-adresse').value.trim();
-    const date = document.getElementById('inp-date').value;
-    const heure = document.getElementById('inp-heure').value;
-    const notes = document.getElementById('inp-notes').value.trim();
+// ══════════════════════════════════════════
+//  RÉSUMÉ FORMULAIRE
+// ══════════════════════════════════════════
+function renderFormSummary() {
+  const container = document.getElementById('form-selected-summary');
+  const items = Object.values(panier);
 
-    if (!nom || !tel || !adresse || !date) {
-      alert('Veuillez remplir tous les champs obligatoires (Nom, Téléphone, Adresse, Date).');
-      return;
-    }
-    if (selectedItems.length === 0) {
-      alert('Veuillez sélectionner au moins une tenue à nettoyer.');
-      return;
-    }
-    const dateObj = new Date(date + 'T00:00:00');
-    const dateFR = dateObj.toLocaleDateString('fr-FR', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-    
-    let msg = `🙏 *PRESSING CÉLESTE – Nouvelle Commande* 🙏\n━━━━━━━━━━━━━━━━━━━━━━\n\n`;
-    msg += `👤 *Nom :* ${nom}\n📞 *Téléphone :* ${tel}\n📍 *Adresse :* ${adresse}\n📅 *Date de récupération :* ${dateFR}\n`;
-    if (heure) msg += `🕐 *Heure préférée :* ${heure}\n`;
-    if (notes) msg += `\n📝 *Notes :* ${notes}\n`;
-    msg += `\n━━━━━━━━━━━━━━━━━━━━━━\n_Message généré via Pressing Céleste_`;
-
-    const NUMERO_WHATSAPP = "2290153007134";
-    window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
+  if (items.length === 0) {
+    container.innerHTML = `<div class="empty-cart-msg">⬆️ Veuillez sélectionner au moins une tenue dans le catalogue ci-dessus.</div>`;
+    return;
   }
+
+  const total = items.reduce((sum, i) => sum + i.prix * i.qty, 0);
+  container.innerHTML = `
+    <div class="selected-summary">
+      <h4>✦ Tenues Sélectionnées</h4>
+      ${items.map(i => `
+        <div class="summary-item">
+          ${i.icon} <strong>${i.nom}</strong> × ${i.qty} = ${(i.prix * i.qty).toLocaleString('fr-FR')} FCFA
+        </div>
+      `).join('')}
+      <div class="summary-total">Total : ${total.toLocaleString('fr-FR')} FCFA &nbsp;(+ Livraison GRATUITE 🎁)</div>
+    </div>`;
+}
+
+// ══════════════════════════════════════════
+//  ENVOI WHATSAPP
+// ══════════════════════════════════════════
+function envoyerCommande() {
+  const nom     = document.getElementById('inp-nom').value.trim();
+  const tel     = document.getElementById('inp-tel').value.trim();
+  const adresse = document.getElementById('inp-adresse').value.trim();
+  const date    = document.getElementById('inp-date').value;
+  const heure   = document.getElementById('inp-heure').value;
+  const notes   = document.getElementById('inp-notes').value.trim();
+
+  if (!nom || !tel || !adresse || !date) {
+    alert('Veuillez remplir tous les champs obligatoires (Nom, Téléphone, Adresse, Date).');
+    return;
+  }
+
+  const items = Object.values(panier);
+  if (items.length === 0) {
+    alert('Veuillez sélectionner au moins une tenue dans le catalogue.');
+    return;
+  }
+
+  const total   = items.reduce((sum, i) => sum + i.prix * i.qty, 0);
+  const dateObj = new Date(date + 'T00:00:00');
+  const dateFR  = dateObj.toLocaleDateString('fr-FR', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
+  let msg = `🙏 *PRESSING CÉLESTE – Nouvelle Commande* 🙏\n`;
+  msg += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+  msg += `👤 *Nom :* ${nom}\n`;
+  msg += `📞 *Téléphone :* ${tel}\n`;
+  msg += `📍 *Adresse :* ${adresse}\n`;
+  msg += `📅 *Date de récupération souhaitée :* ${dateFR}\n`;
+  if (heure) msg += `🕐 *Heure préférée :* ${heure}\n`;
+  msg += `\n✨ *Tenues à nettoyer :*\n`;
+  msg += `─────────────────────\n`;
+  items.forEach(i => {
+    msg += `${i.icon} ${i.nom}\n   Quantité : ${i.qty} × ${i.prix.toLocaleString('fr-FR')} FCFA = *${(i.prix * i.qty).toLocaleString('fr-FR')} FCFA*\n`;
+  });
+  msg += `\n━━━━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `_Message généré via Pressing Céleste_`;
+
+  // ⚠️ REMPLACEZ PAR VOTRE NUMÉRO WHATSAPP (sans le + ni espaces)
+  // Exemple Bénin : 22961234567
+  const NUMERO_WHATSAPP = "2290153007134"; // ← MODIFIEZ ICI
+
+  window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
 
   // Gestion modal
   const modal = document.getElementById('modalCommande');
