@@ -278,7 +278,7 @@
     transform: translateY(1px);
   }
 
-  /* ══════════════ MODAL / SUPERPOSITION ══════════════ */
+  /* ══════════════ MODAL / SUPERPOSITION DU FORMULAIRE ══════════════ */
   .modal-overlay {
     position: fixed;
     top: 0;
@@ -364,19 +364,6 @@
     padding: 2rem 2rem 2rem;
   }
 
-  .commande-header-mini {
-    margin-bottom: 1.8rem;
-    text-align: center;
-  }
-
-  .commande-header-mini .section-label {
-    font-size: 0.6rem;
-  }
-
-  .commande-header-mini .section-title {
-    font-size: 1.6rem;
-  }
-
   .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -424,97 +411,6 @@
     min-height: 80px;
   }
 
-  .tenues-selector {
-    background: var(--gold-pale);
-    border-radius: 16px;
-    padding: 1.2rem;
-    margin-bottom: 1.5rem;
-    border: 1px solid rgba(201,168,76,0.3);
-  }
-
-  .tenues-selector h4 {
-    font-family: 'Cinzel', serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    color: var(--gold);
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .tenues-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.7rem;
-    margin-bottom: 1rem;
-  }
-
-  .tenue-pill {
-    background: var(--white);
-    border: 1px solid rgba(201,168,76,0.4);
-    border-radius: 50px;
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: var(--celestial);
-    cursor: pointer;
-    transition: all 0.2s;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-family: 'Lato', sans-serif;
-  }
-
-  .tenue-pill:hover {
-    background: var(--gold-light);
-    border-color: var(--gold);
-    transform: translateY(-1px);
-  }
-
-  .selected-tenues-list {
-    margin-top: 1rem;
-    padding-top: 0.8rem;
-    border-top: 1px dashed rgba(201,168,76,0.4);
-    font-size: 0.8rem;
-    color: var(--celestial);
-  }
-
-  .selected-tenue-item {
-    display: inline-block;
-    background: var(--celestial);
-    color: white;
-    padding: 0.2rem 0.7rem;
-    border-radius: 50px;
-    font-size: 0.7rem;
-    margin: 0.2rem 0.3rem;
-  }
-
-  .total-preview {
-    background: linear-gradient(135deg, var(--celestial) 0%, var(--celestial-mid) 100%);
-    border-radius: 12px;
-    padding: 1rem 1.3rem;
-    margin: 1rem 0 1.2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-  }
-
-  .total-preview span:first-child {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    font-style: italic;
-  }
-
-  .total-preview strong {
-    font-family: 'Cinzel', serif;
-    font-size: 1.3rem;
-    color: var(--gold-light);
-  }
-
   .submit-btn {
     width: 100%;
     background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
@@ -548,22 +444,12 @@
     line-height: 1.4;
   }
 
-  .remove-tenue {
-    background: none;
-    border: none;
-    color: #cc4444;
-    cursor: pointer;
-    margin-left: 0.3rem;
-    font-size: 0.7rem;
-  }
-
   @media (max-width: 640px) {
     .form-grid { grid-template-columns: 1fr; }
     .hero-bg-photos { grid-template-columns: repeat(2, 1fr); }
     .incitation-card { padding: 2rem 1rem; }
     .incitation-price { font-size: 2.2rem; }
     .modal-body { padding: 1.5rem; }
-    .tenues-buttons { gap: 0.5rem; }
   }
 
   footer {
@@ -617,7 +503,7 @@
   </div>
 </div>
 
-<!-- ══════════════ SECTION INCITATIVE (remplace catalogue + bande photo) ══════════════ -->
+<!-- ══════════════ SECTION INCITATIVE ══════════════ -->
 <section class="incitation-section">
   <div class="incitation-card">
     <div class="incitation-badge">Nettoyage d'Exception</div>
@@ -647,11 +533,6 @@
       <button class="modal-close" id="closeModalBtn">✕</button>
     </div>
     <div class="modal-body">
-      <!-- <div class="commande-header-mini">
-        <span class="section-label">✦ Pressing Céleste ✦</span>
-        <h2 class="section-title">Formulaire de Commande</h2>
-        <div class="section-divider" style="margin:0.5rem auto 0 auto;"></div>
-      </div> -->
 
       <div class="form-grid">
         <div class="form-group">
@@ -683,6 +564,10 @@
       <button class="submit-btn" id="sendWhatsappBtn">
         Envoyer ma commande
       </button>
+      <div class="form-note">
+        * Tous les champs marqués d'un astérisque sont obligatoires<br>
+        Livraison et récupération gratuites à domicile
+      </div>
     </div>
   </div>
 </div>
@@ -697,111 +582,120 @@
 </footer>
 
 <script>
-// ══════════════════════════════════════════
-//  RÉSUMÉ FORMULAIRE
-// ══════════════════════════════════════════
-function renderFormSummary() {
-  const container = document.getElementById('form-selected-summary');
-  const items = Object.values(panier);
+  // ========== FONCTION D'ENVOI WHATSAPP ==========
+  function envoyerCommande() {
+    // Récupération des champs
+    const nom = document.getElementById('inp-nom').value.trim();
+    const tel = document.getElementById('inp-tel').value.trim();
+    const adresse = document.getElementById('inp-adresse').value.trim();
+    const date = document.getElementById('inp-date').value;
+    const heure = document.getElementById('inp-heure').value;
+    const notes = document.getElementById('inp-notes').value.trim();
 
-  if (items.length === 0) {
-    container.innerHTML = `<div class="empty-cart-msg">⬆️ Veuillez sélectionner au moins une tenue dans le catalogue ci-dessus.</div>`;
-    return;
+    // VALIDATIONS
+    if (!nom) {
+      alert('❌ Veuillez entrer votre nom complet');
+      document.getElementById('inp-nom').focus();
+      return false;
+    }
+    
+    if (!tel) {
+      alert('❌ Veuillez entrer votre numéro de téléphone');
+      document.getElementById('inp-tel').focus();
+      return false;
+    }
+    
+    if (!adresse) {
+      alert('❌ Veuillez entrer votre adresse de récupération');
+      document.getElementById('inp-adresse').focus();
+      return false;
+    }
+    
+    if (!date) {
+      alert('❌ Veuillez sélectionner une date de récupération');
+      document.getElementById('inp-date').focus();
+      return false;
+    }
+    
+    // Formatage de la date
+    const dateObj = new Date(date + 'T00:00:00');
+    const dateFR = dateObj.toLocaleDateString('fr-FR', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+    
+    // Construction du message WhatsApp
+    let msg = `🙏 *PRESSING CÉLESTE – Nouvelle Commande* 🙏\n`;
+    msg += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+    msg += `👤 *Nom :* ${nom}\n`;
+    msg += `📞 *Téléphone :* ${tel}\n`;
+    msg += `📍 *Adresse :* ${adresse}\n`;
+    msg += `📅 *Date de récupération :* ${dateFR}\n`;
+    if (heure) msg += `🕐 *Heure préférée :* ${heure}\n`;
+    if (notes) msg += `\n📝 *Notes :* ${notes}\n`;
+    msg += `\n━━━━━━━━━━━━━━━━━━━━━━\n`;
+    msg += `_Service de nettoyage et livraison gratuits_ ✨`;
+    
+    // Envoi vers WhatsApp
+    const NUMERO_WHATSAPP = "2290153007134";
+    const whatsappUrl = `https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(msg)}`;
+    
+    // Ouvrir WhatsApp dans un nouvel onglet
+    window.open(whatsappUrl, '_blank');
+    
+    // Fermer le modal après envoi
+    fermerModal();
+    
+    return true;
   }
 
-  const total = items.reduce((sum, i) => sum + i.prix * i.qty, 0);
-  container.innerHTML = `
-    <div class="selected-summary">
-      <h4>✦ Tenues Sélectionnées</h4>
-      ${items.map(i => `
-        <div class="summary-item">
-          ${i.icon} <strong>${i.nom}</strong> × ${i.qty} = ${(i.prix * i.qty).toLocaleString('fr-FR')} FCFA
-        </div>
-      `).join('')}
-      <div class="summary-total">Total : ${total.toLocaleString('fr-FR')} FCFA &nbsp;(+ Livraison GRATUITE 🎁)</div>
-    </div>`;
-}
-
-// ══════════════════════════════════════════
-//  ENVOI WHATSAPP
-// ══════════════════════════════════════════
-function envoyerCommande() {
-  const nom     = document.getElementById('inp-nom').value.trim();
-  const tel     = document.getElementById('inp-tel').value.trim();
-  const adresse = document.getElementById('inp-adresse').value.trim();
-  const date    = document.getElementById('inp-date').value;
-  const heure   = document.getElementById('inp-heure').value;
-  const notes   = document.getElementById('inp-notes').value.trim();
-
-  if (!nom || !tel || !adresse || !date) {
-    alert('Veuillez remplir tous les champs obligatoires (Nom, Téléphone, Adresse, Date).');
-    return;
-  }
-
-  const items = Object.values(panier);
-  if (items.length === 0) {
-    alert('Veuillez sélectionner au moins une tenue dans le catalogue.');
-    return;
-  }
-
-  const total   = items.reduce((sum, i) => sum + i.prix * i.qty, 0);
-  const dateObj = new Date(date + 'T00:00:00');
-  const dateFR  = dateObj.toLocaleDateString('fr-FR', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-
-  let msg = `🙏 *PRESSING CÉLESTE – Nouvelle Commande* 🙏\n`;
-  msg += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
-  msg += `👤 *Nom :* ${nom}\n`;
-  msg += `📞 *Téléphone :* ${tel}\n`;
-  msg += `📍 *Adresse :* ${adresse}\n`;
-  msg += `📅 *Date de récupération souhaitée :* ${dateFR}\n`;
-  if (heure) msg += `🕐 *Heure préférée :* ${heure}\n`;
-  msg += `\n✨ *Tenues à nettoyer :*\n`;
-  msg += `─────────────────────\n`;
-  items.forEach(i => {
-    msg += `${i.icon} ${i.nom}\n   Quantité : ${i.qty} × ${i.prix.toLocaleString('fr-FR')} FCFA = *${(i.prix * i.qty).toLocaleString('fr-FR')} FCFA*\n`;
-  });
-  msg += `\n━━━━━━━━━━━━━━━━━━━━━━\n`;
-  msg += `_Message généré via Pressing Céleste_`;
-
-  // ⚠️ REMPLACEZ PAR VOTRE NUMÉRO WHATSAPP (sans le + ni espaces)
-  // Exemple Bénin : 22961234567
-  const NUMERO_WHATSAPP = "2290153007134"; // ← MODIFIEZ ICI
-
-  window.open(`https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
-}
-
-
-  // Gestion modal
+  // ========== GESTION DU MODAL ==========
   const modal = document.getElementById('modalCommande');
   const btnCommander = document.getElementById('btnCommanderMain');
   const closeBtn = document.getElementById('closeModalBtn');
 
   function ouvrirModal() {
+    if (!modal) return;
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
-    // Préremplir date min
-    document.getElementById('inp-date').min = new Date().toISOString().split('T')[0];
-    // Réinitialisation optionnelle ? On garde la sélection en cours si souhaité, mais pour une meilleure expérience on laisse l'utilitaire.
+    
+    // Date minimale = aujourd'hui
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('inp-date').min = today;
   }
 
   function fermerModal() {
+    if (!modal) return;
     modal.classList.remove('active');
     document.body.style.overflow = '';
   }
 
-  btnCommander.addEventListener('click', ouvrirModal);
-  closeBtn.addEventListener('click', fermerModal);
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) fermerModal();
-  });
+  // Événements du modal
+  if (btnCommander) {
+    btnCommander.addEventListener('click', ouvrirModal);
+  }
+  
+  if (closeBtn) {
+    closeBtn.addEventListener('click', fermerModal);
+  }
+  
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) fermerModal();
+    });
+  }
+  
+  // Bouton d'envoi
+  const sendBtn = document.getElementById('sendWhatsappBtn');
+  if (sendBtn) {
+    sendBtn.addEventListener('click', envoyerCommande);
+  }
 
-  document.getElementById('sendWhatsappBtn').addEventListener('click', envoyerCommande);
-
-  // Initialisation
-  renderTenueButtons();
-  updateSelectedList();
-  updateTotal();
-  document.getElementById('inp-date').min = new Date().toISOString().split('T')[0];
+  // ========== INITIALISATION ==========
+  // Date minimale
+  const dateInput = document.getElementById('inp-date');
+  if (dateInput) {
+    dateInput.min = new Date().toISOString().split('T')[0];
+  }
+  
+  console.log('✅ Formulaire prêt !');
 </script>
 </body>
 </html>
