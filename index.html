@@ -265,7 +265,8 @@
     box-shadow: 0 8px 20px rgba(37,211,102,0.3);
     display: inline-flex;
     align-items: center;
-    gap: 0.8rem;
+    gap: 0.8rem; 
+    text-decoration : none;
   }
 
   .btn-commande-main:hover {
@@ -276,7 +277,7 @@
 
   .btn-commande-main:active {
     transform: translateY(1px);
-  }
+  } 
 
   /* ══════════════ MODAL / SUPERPOSITION DU FORMULAIRE ══════════════ */
   .modal-overlay {
@@ -486,25 +487,17 @@
 
   <div class="hero-content">
     <div class="hero-badge">✦ Service de Pressing Sacré ✦</div>
-    <h1 class="hero-title">Pressing <span>Céleste</span></h1>
+    <h1 class="hero-title"><span>Pressing Céleste</span></h1>
+    <h1 class="hero-title">SOUTANE D'OSHOFFA</h1>
     <p class="hero-subtitle">Spécialiste du nettoyage des tenues de<br>l'Église du Christianisme Céleste</p>
-    <div class="hero-free-badge">Récupération &amp; Livraison GRATUITES à domicile</div>
+    <a href="#ancre" class="btn-commande-main">PASSER MA COMMANDE</a>
+    <!-- <div class="hero-free-badge">Récupération &amp; Livraison GRATUITES à domicile</div> -->
   </div>
   <div class="hero-scroll"><div class="scroll-line"></div><span>Découvrir</span></div>
 </section>
 
-<!-- ══════════════ BANNER ══════════════ -->
-<div class="info-banner">
-  <div class="info-banner-inner">
-    <div class="free-delivery-card">
-      <h3>Déplacement Entièrement Gratuit</h3>
-      <p>Nous venons récupérer vos tenues sacrées à votre domicile et nous vous les restituons propres et soignées, sans aucun frais de déplacement.</p>
-    </div>
-  </div>
-</div>
-
 <!-- ══════════════ SECTION INCITATIVE ══════════════ -->
-<section class="incitation-section">
+<section class="incitation-section" id="ancre">
   <div class="incitation-card">
     <div class="incitation-badge">Nettoyage d'Exception</div>
     <h2 class="incitation-title">Confiez-nous votre tenue sacrée</h2>
@@ -525,6 +518,17 @@
   </div>
 </section>
 
+<!-- ══════════════ BANNER ══════════════ -->
+<div class="info-banner">
+  <div class="info-banner-inner">
+    <!-- <div class="free-delivery-card">
+      <h3>Déplacement Entièrement Gratuit</h3>
+      <p>Nous venons récupérer vos tenues sacrées à votre domicile et nous vous les restituons propres et soignées, sans aucun frais de déplacement.</p>
+    </div> -->
+    <div class="hero-free-badge">Récupération &amp; Livraison GRATUITES à domicile</div>
+  </div>
+</div>
+
 <!-- ══════════════ MODAL / SUPERPOSITION DU FORMULAIRE ══════════════ -->
 <div class="modal-overlay" id="modalCommande">
   <div class="modal-container">
@@ -535,37 +539,17 @@
     <div class="modal-body">
 
       <div class="form-grid">
-     <!--   <div class="form-group">
-          <label class="form-label" for="inp-nom">Nom complet *</label>
-          <input class="form-input" type="text" id="inp-nom" placeholder="Ex : Frère Emmanuel Koffi" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="inp-tel">Téléphone / WhatsApp *</label>
-          <input class="form-input" type="tel" id="inp-tel" placeholder="+229 01 XX XX XX XX" required>
-        </div> -->
         <div class="form-group full">
           <label class="form-label" for="inp-adresse">Adresse de récupération *</label>
           <input class="form-input" type="text" id="inp-adresse" placeholder="Ville et quartier précis..." required>
         </div>
-     <!--   <div class="form-group">
-          <label class="form-label" for="inp-date">Date souhaitée de récupération *</label>
-          <input class="form-input" type="date" id="inp-date" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="inp-heure">Heure préférée</label>
-          <input class="form-input" type="time" id="inp-heure">
-        </div>
-        <div class="form-group full">
-          <label class="form-label" for="inp-notes">Notes ou instructions particulières</label>
-          <textarea class="form-textarea" id="inp-notes" placeholder="Taches particulières, fragilité du tissu, instructions spéciales..."></textarea>
-        </div> -->
-      </div>
+      </div> 
 
       <button class="submit-btn" id="sendWhatsappBtn">
         Envoyer ma commande
       </button>
       <div class="form-note">
-        * Tous les champs marqués d'un astérisque sont obligatoires<br>
+        <!-- * Tous les champs marqués d'un astérisque sont obligatoires<br> -->
         Livraison et récupération gratuites à domicile
       </div>
     </div>
@@ -583,119 +567,76 @@
 
 <script>
   // ========== FONCTION D'ENVOI WHATSAPP ==========
-  function envoyerCommande() {
-    // Récupération des champs
-    const nom = document.getElementById('inp-nom').value.trim();
-    const tel = document.getElementById('inp-tel').value.trim();
-    const adresse = document.getElementById('inp-adresse').value.trim();
-    const date = document.getElementById('inp-date').value;
-    const heure = document.getElementById('inp-heure').value;
-    const notes = document.getElementById('inp-notes').value.trim();
+function envoyerCommande() {
+  // Récupération uniquement de l'adresse
+  const adresse = document.getElementById('inp-adresse').value.trim();
 
-    // VALIDATIONS
-    if (!nom) {
-      alert('❌ Veuillez entrer votre nom complet');
-      document.getElementById('inp-nom').focus();
-      return false;
-    }
-    
-    if (!tel) {
-      alert('❌ Veuillez entrer votre numéro de téléphone');
-      document.getElementById('inp-tel').focus();
-      return false;
-    }
-    
-    if (!adresse) {
-      alert('❌ Veuillez entrer votre adresse de récupération');
-      document.getElementById('inp-adresse').focus();
-      return false;
-    }
-    
-    if (!date) {
-      alert('❌ Veuillez sélectionner une date de récupération');
-      document.getElementById('inp-date').focus();
-      return false;
-    }
-    
-    // Formatage de la date
-    const dateObj = new Date(date + 'T00:00:00');
-    const dateFR = dateObj.toLocaleDateString('fr-FR', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-    
-    // Construction du message WhatsApp
-    let msg = `🙏 *PRESSING CÉLESTE – Nouvelle Commande* 🙏\n`;
-    msg += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
-    msg += `👤 *Nom :* ${nom}\n`;
-    msg += `📞 *Téléphone :* ${tel}\n`;
-    msg += `📍 *Adresse :* ${adresse}\n`;
-    msg += `📅 *Date de récupération :* ${dateFR}\n`;
-    if (heure) msg += `🕐 *Heure préférée :* ${heure}\n`;
-    if (notes) msg += `\n📝 *Notes :* ${notes}\n`;
-    msg += `\n━━━━━━━━━━━━━━━━━━━━━━\n`;
-    msg += `_Service de nettoyage et livraison gratuits_ ✨`;
-    
-    // Envoi vers WhatsApp
-    const NUMERO_WHATSAPP = "2290153007134";
-    const whatsappUrl = `https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(msg)}`;
-    
-    // Ouvrir WhatsApp dans un nouvel onglet
-    window.open(whatsappUrl, '_blank');
-    
-    // Fermer le modal après envoi
-    fermerModal();
-    
-    return true;
+  // Validation uniquement de l'adresse
+  if (!adresse) {
+    alert('❌ Veuillez entrer votre adresse de récupération');
+    document.getElementById('inp-adresse').focus();
+    return false;
   }
 
-  // ========== GESTION DU MODAL ==========
-  const modal = document.getElementById('modalCommande');
-  const btnCommander = document.getElementById('btnCommanderMain');
-  const closeBtn = document.getElementById('closeModalBtn');
-
-  function ouvrirModal() {
-    if (!modal) return;
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    
-    // Date minimale = aujourd'hui
-    const today = new Date().toISOString().split('T')[0];
-    document.getElementById('inp-date').min = today;
-  }
-
-  function fermerModal() {
-    if (!modal) return;
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  // Événements du modal
-  if (btnCommander) {
-    btnCommander.addEventListener('click', ouvrirModal);
-  }
+  // Construction du message WhatsApp (uniquement l'adresse)
+  let msg = `🙏 *PRESSING CÉLESTE – Nouvelle Commande* 🙏\n`;
+  msg += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+  msg += `📍 *Adresse de récupération :* ${adresse}\n`;
+  msg += `\n━━━━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `_VENEZ RECUPERER MES COMMANDES !_ ✨`;
   
-  if (closeBtn) {
-    closeBtn.addEventListener('click', fermerModal);
-  }
+  // Envoi vers WhatsApp
+  const NUMERO_WHATSAPP = "2290153007134";
+  const whatsappUrl = `https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(msg)}`;
   
-  if (modal) {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) fermerModal();
-    });
-  }
+  // Ouvrir WhatsApp dans un nouvel onglet
+  window.open(whatsappUrl, '_blank');
   
-  // Bouton d'envoi
-  const sendBtn = document.getElementById('sendWhatsappBtn');
-  if (sendBtn) {
-    sendBtn.addEventListener('click', envoyerCommande);
-  }
+  // Fermer le modal après envoi
+  fermerModal();
+  
+  return true;
+}
 
-  // ========== INITIALISATION ==========
-  // Date minimale
-  const dateInput = document.getElementById('inp-date');
-  if (dateInput) {
-    dateInput.min = new Date().toISOString().split('T')[0];
-  }
-  
-  console.log('✅ Formulaire prêt !');
+// ========== GESTION DU MODAL ==========
+const modal = document.getElementById('modalCommande');
+const btnCommander = document.getElementById('btnCommanderMain');
+const closeBtn = document.getElementById('closeModalBtn');
+
+function ouvrirModal() {
+  if (!modal) return;
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function fermerModal() {
+  if (!modal) return;
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Événements du modal
+if (btnCommander) {
+  btnCommander.addEventListener('click', ouvrirModal);
+}
+
+if (closeBtn) {
+  closeBtn.addEventListener('click', fermerModal);
+}
+
+if (modal) {
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) fermerModal();
+  });
+}
+
+// Bouton d'envoi
+const sendBtn = document.getElementById('sendWhatsappBtn');
+if (sendBtn) {
+  sendBtn.addEventListener('click', envoyerCommande);
+}
+
+console.log('✅ Formulaire prêt !');
 </script>
 </body>
 </html>
