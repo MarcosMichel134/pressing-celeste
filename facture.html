@@ -29,7 +29,6 @@
             gap: 30px;
         }
 
-        /* Formulaire */
         .form-card {
             background: white;
             border-radius: 32px;
@@ -169,7 +168,6 @@
             overflow-y: auto;
         }
 
-        /* STYLE FACTURE A4 - Version simplifiee pour le PDF */
         .facture-a4 {
             width: 100%;
             max-width: 800px;
@@ -388,7 +386,7 @@
         <div class="invoice-container" id="facturePreview">
             <div style="text-align:center;color:#8fa3bc;padding:50px;">Remplissez le formulaire et generez la facture</div>
         </div>
-        <button class="btn-download" id="downloadBtn" style="display:none;">Telecharger en PDF (A4)</button>
+        <button class="btn-download" id="downloadBtn" style="display:none;">Telecharger le PDF</button>
     </div>
 </div>
 
@@ -464,8 +462,8 @@
                     <td style="border: 1px solid #dee2e6; padding: 8px; text-align: center;">${p.qte}</td>
                     <td style="border: 1px solid #dee2e6; padding: 8px; text-align: center;">${p.prix.toLocaleString()} FCFA</td>
                     <td style="border: 1px solid #dee2e6; padding: 8px; text-align: center;">${p.total.toLocaleString()} FCFA</td>
-                </tr>
-            `;
+                `
+            ;
         });
 
         const factureHTML = `
