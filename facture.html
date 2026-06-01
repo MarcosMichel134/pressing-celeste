@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pressing Celeste - Facture A4</title>
+    <title>Pressing SBJ OSCHOFFA - Facture A4</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
     <style>
       * {
@@ -446,12 +446,25 @@
         div.className = "product-row";
         div.innerHTML = `
             <select class="serviceSelect">
-                <option value="Nettoyage costume" data-price="3500">Nettoyage costume</option>
-                <option value="Nettoyage robe" data-price="3000">Nettoyage robe</option>
-                <option value="Nettoyage chemise" data-price="2000">Nettoyage chemise</option>
-                <option value="Repassage" data-price="1500">Repassage</option>
-                <option value="Retouches" data-price="2500">Retouches</option>
-                <option value="Nettoyage couette" data-price="5000">Nettoyage couette</option>
+                <option value="Repassage" data-price="300">Repassage</option>
+              <option value="Nettoyage costume" data-price="1000">
+                Soutane simple Homme
+              </option>
+              <option value="Nettoyage costume" data-price="1000">
+                Soutane Homme + Sangle
+              </option>
+              <option value="Nettoyage costume" data-price="1000">
+                Toge Homme
+              </option>
+              <option value="Nettoyage costume" data-price="1000">
+                Soutane simple Femme
+              </option>
+              <option value="Nettoyage robe" data-price="1000">
+                Soutane Femme + Sangle
+              </option>
+              <option value="Nettoyage robe" data-price="1000">
+                Toge Femme
+              </option>
             </select>
             <input type="number" class="qty-input" placeholder="Qte" value="1" min="1">
             <button type="button" class="btn-remove" onclick="removeProduct(this)">X</button>
@@ -517,10 +530,10 @@
             <div class="facture-a4" id="factureA4Content">
                 <div class="facture-header">
                     <div class="brand">
-                        <h1>PRESSING CELESTE - SOUTANE D'OSHOFFA</h1>
-                        <p>Nettoyage & repassage de qualite premium</p>
-                        <p>+229 0191 947 138 | contact@pressingceleste.com</p>
-                        <p>Cotonou</p>
+                        <h1>PRESSING SBJ OSCHOFFA</h1>
+                        <p>Labo des vêtements liturgiques</p>
+                        <p>+229 01 9194 7138 
+                        <p>Dêkoungbé, derrière l'Eglise Catholique</p>
                     </div>
                     <div class="facture-meta">
                         <div class="numero">FACTURE N° ${compteur.toString().padStart(4, "0")}</div>
@@ -557,9 +570,9 @@
                 </div>
 
                 <div class="facture-footer">
-                    Merci de votre confiance - Nettoyage soigne, retouches rapides <br>
+                    Merci de votre confiance - Nettoyage soigne, livraisons rapides <br>
                     Service client disponible du lundi au samedi de 8h a 19h<br>
-                    Site web : www.pressingceleste.com
+                    Site web : www.pressingcelesteoshoffa.com
                 </div>
             </div>
         `;
