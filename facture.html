@@ -360,6 +360,22 @@
           <input type="text" id="clientName" placeholder="Ex: Mme Benedicte" />
         </div>
         <div class="form-group">
+          <label>Adresse du client</label>
+          <input
+            type="text"
+            id="clientAddress"
+            placeholder="Ex: 12 rue des Lilas, Cotonou"
+          />
+        </div>
+        <div class="form-group">
+          <label>Contact du client</label>
+          <input
+            type="text"
+            id="clientContact"
+            placeholder="Ex: 01 90 12 34 56"
+          />
+        </div>
+        <div class="form-group">
           <label>Date d'emission</label>
           <input type="date" id="invoiceDate" />
         </div>
@@ -638,6 +654,12 @@
       function genererFacture() {
         const client =
           document.getElementById("clientName").value.trim() || "Client";
+        const clientAddress =
+          document.getElementById("clientAddress").value.trim() ||
+          "Adresse non renseignée";
+        const clientContact =
+          document.getElementById("clientContact").value.trim() ||
+          "Contact non renseigné";
         const date = document.getElementById("invoiceDate").value;
         const remisePourcent =
           parseFloat(document.getElementById("discountValue").value) || 0;
@@ -683,6 +705,8 @@
                     <div class="client-info">
                         <p><strong>Facture a :</strong></p>
                         <p>${client}</p>
+                        <p>${clientAddress}</p>
+                        <p>${clientContact}</p>
                     </div>
                     <div class="badge">Paiement : especes / Mobile Money</div>
                 </div>
